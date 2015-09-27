@@ -17,7 +17,7 @@ makeCacheMatrix <- function(specialMatrix = numeric()){
 ## cacheSolve calculates a matrix inverse if it has not
 
 cacheSolve <- function(inverseEnvironment){
-	specialInverse <- inverseEnvironment$getsolve()
+	specialInverse <- inverseEnvironment$getInverse()
 	if (!is.null(specialInverse)){
 		message("getting cached data")
 		return(specialInverse)
