@@ -1,15 +1,29 @@
-## Put comments here that give an overall description of what your
-## functions do
+## These functions create a function environment and return an inverse of a matrix
+##  - The inverse of the matrix is calculated if necessary
 
-## Write a short comment describing this function
+## makeCacheMatix creates functions and returns them in a list
 
-makeCacheMatrix <- function(x = matrix()) {
-
+makeCacheMatrix <- function(specialMatrix = numeric()){
+	set <- function(specialInput){
+		specialMatrix <<- specialInput
+		specialInverse <<- NULL
+	}
+	get <- function() specialMatrix
+	setInverse <- function(newInverse) specialInverse <<- newInverse
+	getInverse <- function() specialInverse
+	list(set = set,get = get,setInverse = setInverse,getInverse = getInverse)
 }
 
+## cacheSolve calculates a matrix inverse if it has not
 
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve <- function(inverseEnvironment){
+	specialInverse <- inverseEnvironment$getsolve()
+	if (!is.null(specialInverse)){
+		message("getting cached data")
+		return(specialInverse)
+	}
+	tempMatrix <- inverseEnvironment$get()
+	specialInverse <- solve(tempMatrix)
+	inverseEnvironment$setInverse(specialInverse)
+	specialInverse
 }
